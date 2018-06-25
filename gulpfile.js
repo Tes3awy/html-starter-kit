@@ -24,7 +24,7 @@ gulp.task('sass', () => {
     .pipe(gulp.dest('src/assets/css/'));
 });
 
-gulp.task('rtlcss', function() {
+gulp.task('rtlcss', () => {
   return gulp
     .src('src/assets/css/main.css')
     .pipe(postcss([rtlcss()]))
