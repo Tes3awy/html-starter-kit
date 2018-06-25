@@ -1,0 +1,19 @@
+/* MAIN SCSS FILE */
+// Abstract
+@import 'abstracts/variables';
+@import 'abstracts/functions';
+@import 'abstracts/mixins';
+@import 'abstracts/placeholders';
+// Vendor
+// Base
+@import 'base/base';
+@import 'base/typography';
+@import 'base/animations';
+// Layout
+@import 'layout/navigation';
+@import 'layout/header';
+@import 'layout/footer';
+// Components
+@import 'components/buttons';
+// Pages
+@import 'pages/home';
