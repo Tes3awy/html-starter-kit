@@ -17,10 +17,10 @@ gulp.task('sass', () => {
     .pipe(
       postcss([autoprefixer({ browsers: ['last 2 versions'], cascade: true })])
     )
-    .pipe(gulp.dest('src/assets/css'))
+    .pipe(gulp.dest('src/assets/css/'))
     .pipe(postcss([cssnano()]))
     .pipe(rename({ suffix: '.min' }))
-    .pipe(gulp.dest('dist/assets/css'))
+    .pipe(gulp.dest('dist/assets/css/'))
     .pipe(gulp.dest('src/assets/css/'));
 });
 
@@ -32,7 +32,7 @@ gulp.task('rtlcss', function() {
     .pipe(gulp.dest('src/assets/css/'))
     .pipe(postcss([cssnano()]))
     .pipe(rename({ suffix: '.min' }))
-    .pipe(gulp.dest('dist/assets/css'))
+    .pipe(gulp.dest('dist/assets/css/'))
     .pipe(gulp.dest('src/assets/css/'));
 });
 
@@ -55,12 +55,12 @@ gulp.task('copy-js', () => {
 
 // Copy CSS from node_modules
 gulp.task('copy-css', () => {
-  return gulp.src(['node_modules/']).pipe(gulp.dest('dist/assets/css'));
+  return gulp.src(['node_modules/']).pipe(gulp.dest('dist/assets/css/'));
 });
 
 // Copy Fonts from node_modules
 gulp.task('copy-fonts', () => {
-  return gulp.src(['node_modules/']).pipe(gulp.dest('dist/assets/fonts'));
+  return gulp.src(['node_modules/']).pipe(gulp.dest('dist/assets/fonts/'));
 });
 
 // Copy index.html from src to dist
@@ -82,7 +82,7 @@ gulp.task('imagemin', () => {
       })
     )
     .pipe(rename({ suffix: '-min' }))
-    .pipe(gulp.dest('dist/assets/images'));
+    .pipe(gulp.dest('dist/assets/images/'));
 });
 
 // Watch Task
@@ -90,7 +90,7 @@ gulp.task('watch', () => {
   gulp.watch('src/sass/**', ['sass']);
   gulp.watch('src/assets/css/main.css', ['rtlcss']);
   gulp.watch('src/assets/js/app.js', ['min-js']);
-  gulp.watch('src/*.html', ['copy-html']);
+  gulp.watch('src/*.html', ['copy-html', 'sass', 'rtlcss', 'min-js']);
   gulp.watch('src/assets/images/*', ['imagemin']);
 });
 
