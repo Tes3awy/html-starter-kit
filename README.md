@@ -32,6 +32,7 @@ The directory tree should look like this. Unless you want to change `src` and `d
 │   │    ├── js
 │   └── index.html
 ├── .gitignore
+├── robots.txt
 ├── gulpfile.js
 ├── package.json
 ├── node_modules
