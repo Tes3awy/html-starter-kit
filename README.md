@@ -1,17 +1,14 @@
 # Documentation
 
-You need to run `npm install` to install all dependencies. Then just run `npm run watch` and you're ready to start your project right away.
+You need to run `npm install` to install all dependencies. Then just run `npm start` and you're ready to start your project right away.
 
-Once the dependecies are installed, and `npm run watch` is running in your terminal. Open `index.html` and save it, a `dist` folder will immediatly be created.
+Once the dependecies are installed, and `npm start` is running in your terminal. Open `index.html` and save it, a `dist` folder will automatically be created.
 
-Carefully inspect `gulpfile.js`. It's well commented and you'll easily understand it.
+Carefully inspect `gulpfile.js`. It's well commented and can be easily understood.
 
-This starter template is also optimized for RTL websites.
+This starter template is also optimized for RTL websites. All CSS files are also duplicated for RTL styles on save.
 
-------
-> Since empty directories cannot be commited. `dist` folder will be automatically generated once you save `index.html` file found in `src` directory.
-------
-The directory tree should be like this. Unless you want to change `src` and `dest` in all tasks in `gulpfile.js`.
+The directory tree should look like this. Unless you want to change `src` and `dest` in all tasks in `gulpfile.js`.
 
 ```bash
 ├── src

@@ -1,39 +1,58 @@
 const gulp = require('gulp');
+
 const sass = require('gulp-sass');
 const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 const rtlcss = require('rtlcss');
+
 const uglify = require('gulp-uglify');
+
 const rename = require('gulp-rename');
+
 const imagemin = require('gulp-imagemin');
-// const notify = require('gulp-notify');
+
+const browserSync = require('browser-sync').create();
+
+// Static Server + watching scss/html files
+gulp.task('serve', ['sass', 'rtlcss', 'imagemin', 'min-js'], () => {
+  browserSync.init({
+    server: './src'
+  });
+
+  gulp.watch('src/assets/sass/**/*.scss', ['sass', 'rtlcss']);
+  gulp.watch('src/assets/js/app.js', ['min-js']);
+  gulp.watch('src/assets/images/*', ['imagemin']);
+  gulp.watch('src/*.html').on('change', browserSync.reload);
+});
 
 // Compile and Autoprefix sass and minify css
 gulp.task('sass', () => {
+  const plugins = [
+    autoprefixer({ browsers: ['last 2 versions'], cascade: true }),
+    cssnano()
+  ];
   return gulp
     .src('src/sass/main.scss')
     .pipe(sass.sync().on('error', sass.logError))
-    .pipe(
-      postcss([autoprefixer({ browsers: ['last 2 versions'], cascade: true })])
-    )
+    .pipe(postcss([plugins[0]]))
     .pipe(gulp.dest('src/assets/css/'))
-    .pipe(postcss([cssnano()]))
+    .pipe(postcss([plugins[1]]))
     .pipe(rename({ suffix: '.min' }))
     .pipe(gulp.dest('dist/assets/css/'))
-    .pipe(gulp.dest('src/assets/css/'));
+    .pipe(browserSync.stream());
 });
 
 gulp.task('rtlcss', () => {
+  const plugins = [rtlcss(), cssnano()];
   return gulp
     .src('src/assets/css/main.css')
-    .pipe(postcss([rtlcss()]))
+    .pipe(postcss([plugins[0]]))
     .pipe(rename({ suffix: '-rtl' }))
     .pipe(gulp.dest('src/assets/css/'))
-    .pipe(postcss([cssnano()]))
+    .pipe(postcss([plugins[1]]))
     .pipe(rename({ suffix: '.min' }))
-    .pipe(gulp.dest('dist/assets/css/'))
-    .pipe(gulp.dest('src/assets/css/'));
+    .pipe(gulp.dest('dist/assets/css/'));
 });
 
 // Minify app.js
@@ -42,8 +61,7 @@ gulp.task('min-js', () => {
     .src('src/assets/js/app.js')
     .pipe(uglify())
     .pipe(rename({ suffix: '.min' }))
-    .pipe(gulp.dest('dist/assets/js/'))
-    .pipe(gulp.dest('src/assets/js/'));
+    .pipe(gulp.dest('dist/assets/js/'));
 });
 
 // Copy JS from node_modules
@@ -63,12 +81,6 @@ gulp.task('copy-fonts', () => {
   return gulp.src(['node_modules/']).pipe(gulp.dest('dist/assets/fonts/'));
 });
 
-// Copy index.html from src to dist
-gulp.task('copy-html', () => {
-  return gulp.src(['src/*.html']).pipe(gulp.dest('dist/'));
-  // .pipe(notify({ message: 'task complete', onLast: true }));
-});
-
 // Compress Images
 gulp.task('imagemin', () => {
   gulp
@@ -77,22 +89,16 @@ gulp.task('imagemin', () => {
       imagemin({
         verbose: true,
         progressive: true,
-        optimizationLevel: 4,
-        interlaced: true,
+        optimizationLevel: 5,
+        interlaced: true
       })
     )
     .pipe(rename({ suffix: '-min' }))
     .pipe(gulp.dest('dist/assets/images/'));
 });
 
-// Watch Task
-gulp.task('watch', () => {
-  gulp.watch('src/sass/**', ['sass']);
-  gulp.watch('src/assets/css/main.css', ['rtlcss']);
-  gulp.watch('src/assets/js/app.js', ['min-js']);
-  gulp.watch('src/*.html', ['copy-html', 'sass', 'rtlcss', 'min-js']);
-  gulp.watch('src/assets/images/*', ['imagemin']);
-});
+// Copy all assets from node_modules at once
+gulp.task('copy-assets', ['copy-js', 'copy-css', 'copy-fonts']);
 
 // Default Task
-gulp.task('default', ['copy-js', 'copy-css', 'copy-fonts']);
+gulp.task('default', ['serve']);
