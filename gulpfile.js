@@ -17,7 +17,7 @@ const browserSync = require('browser-sync').create();
 // Static Server + watching scss/html files
 gulp.task('serve', ['sass', 'rtlcss', 'imagemin', 'min-js'], () => {
   browserSync.init({
-    server: './src'
+    server: './'
   });
 
   gulp.watch('src/assets/sass/**/*.scss', ['sass', 'rtlcss']);
