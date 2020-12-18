@@ -23,7 +23,7 @@ gulp.task('serve', ['sass', 'rtlcss', 'imagemin', 'min-js'], () => {
   gulp.watch('src/assets/sass/**/*.scss', ['sass', 'rtlcss']);
   gulp.watch('src/assets/js/app.js', ['min-js']);
   gulp.watch('src/assets/images/*', ['imagemin']);
-  gulp.watch('src/*.html').on('change', browserSync.reload);
+  gulp.watch('./*.html').on('change', browserSync.reload);
 });
 
 // Compile and Autoprefix sass and minify css
