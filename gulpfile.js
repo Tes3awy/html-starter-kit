@@ -29,11 +29,11 @@ gulp.task('serve', ['sass', 'rtlcss', 'imagemin', 'min-js'], () => {
 // Compile and Autoprefix sass and minify css
 gulp.task('sass', () => {
   const plugins = [
-    autoprefixer({ browsers: ['last 2 versions'], cascade: true }),
+    autoprefixer({ overrideBrowserslist: ['last 4 versions'], cascade: true }),
     cssnano()
   ];
   return gulp
-    .src('src/sass/main.scss')
+    .src('src/sass/**/*.scss')
     .pipe(sass.sync().on('error', sass.logError))
     .pipe(postcss([plugins[0]]))
     .pipe(gulp.dest('src/assets/css/'))
@@ -43,6 +43,7 @@ gulp.task('sass', () => {
     .pipe(browserSync.stream());
 });
 
+// Generate RTLCSS file
 gulp.task('rtlcss', () => {
   const plugins = [rtlcss(), cssnano()];
   return gulp
