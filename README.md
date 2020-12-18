@@ -15,30 +15,57 @@ Gulp 3 is outdated and no longer supported by Node.js 11.0.0 and above.
 Add `npm-shrinkwrap.json` file to make Gulp v3.9.1 compitable with Node.js v11.0.0 and above.
 
 ```bash
-├── src
-│   ├── assets
-│   │    ├── css
-│   │    ├── images
-│   │    ├── js
-│   │    │   ├── app.js
-│   ├── sass
-│   │    │   ├── abstracts
-│   │    │   ├── base
-│   │    │   ├── components
-│   │    │   ├── layout
-│   │    │   ├── pages
-│   │    │   ├── main.scss
-│   └── index.html
-├── dist
-│   ├── assets
-│   │    ├── css
-│   │    ├── images
-│   │    ├── js
-│   └── index.html
-├── .gitignore
-├── robots.txt
-├── gulpfile.js
-├── package.json
-├── node_modules
-└── README.md
+│   .browserslistrc
+│   .gitignore
+│   gulpfile.js
+│   index.html
+│   npm-shrinkwrap.json
+│   package.json
+│   README.md
+│   robots.txt
+│
+├───dist
+│   └───assets
+│       ├───css
+│       │       .gitkeep
+│       │
+│       ├───images
+│       │       .gitkeep
+│       │
+│       └───js
+└───src
+    ├───assets
+    │   ├───css
+    │   │       .gitkeep
+    │   │
+    │   ├───images
+    │   │       .gitkeep
+    │   │
+    │   └───js
+    │           app.js
+    │
+    └───sass
+        │   main.scss
+        │
+        ├───abstracts
+        │       _functions.scss
+        │       _mixins.scss
+        │       _placeholders.scss
+        │       _variables.scss
+        │
+        ├───base
+        │       _animations.scss
+        │       _base.scss
+        │       _typography.scss
+        │
+        ├───components
+        │       _buttons.scss
+        │
+        ├───layout
+        │       _footer.scss
+        │       _header.scss
+        │       _navigation.scss
+        │
+        └───pages
+                _home.scss
 ```
