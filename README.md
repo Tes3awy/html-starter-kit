@@ -1,6 +1,13 @@
 # Starter Kit Documentation
 
-First, you need to run `npm install` to install all dependencies. Then, just run `npm start` and you're ready to start your project right away. Once you save `index.html`, a `dist` directory will be created automatically.
+## Table of Contents
+1. [Important Update](#Update-as-of-18-Dec.-2020)
+2. [Changelog](#Changelog)
+3. [TODO](#TODO)
+
+---
+
+First, you need to run `npm install` to install all dependencies. Then, just run `npm start` and you're ready to start your project right away. Once you save `index.html`, a `dist` directory will be created automagically :sparkles:.
 
 Carefully inspect `gulpfile.js`. It's well commented and can be easily understood.
 
@@ -81,3 +88,5 @@ After you run `npm install`, `npm-shrinkwrap.json` will be modified. **DON'T TOU
 ## TODO
 
 - [ ] Update to Gulp 4.
+
+> Feel free to create a [Pull Request](https://github.com/Tes3awy/html-starter-kit/pulls) and update the kit to Gulp 4.
