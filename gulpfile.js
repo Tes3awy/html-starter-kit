@@ -10,26 +10,31 @@ const uglify = require('gulp-uglify');
 
 const rename = require('gulp-rename');
 
-const imagemin = require('gulp-imagemin');
-
 const browserSync = require('browser-sync').create();
 
+const log = console.log;
+const chalk = require('chalk');
+
 // Static Server + watching scss/html files
-gulp.task('serve', ['sass', 'rtlcss', 'imagemin', 'min-js'], () => {
+gulp.task('serve', ['sass', 'rtlcss', 'min-js'], () => {
   browserSync.init({
-    server: './'
+    server: {
+      baseDir: './'
+    },
+    watch: true,
+    logLevel: "info",
+    logPrefix: "Starter Kit"
   });
 
-  gulp.watch('src/assets/sass/**/*.scss', ['sass', 'rtlcss']);
-  gulp.watch('src/assets/js/app.js', ['min-js']);
-  gulp.watch('src/assets/images/*', ['imagemin']);
+  gulp.watch('src/sass/**/*.scss', ['sass', 'rtlcss']).on('change', browserSync.reload);
+  gulp.watch('src/assets/js/app.js', ['min-js']).on('change', browserSync.reload);
   gulp.watch('./*.html').on('change', browserSync.reload);
 });
 
-// Compile and Autoprefix sass and minify css
+// Compile and Autoprefix scss and minify css
 gulp.task('sass', () => {
   const plugins = [
-    autoprefixer({ overrideBrowserslist: ['last 4 versions'], cascade: true }),
+    autoprefixer({ cascade: true, ignoreUnknownVersions: true }),
     cssnano()
   ];
   return gulp
@@ -43,9 +48,12 @@ gulp.task('sass', () => {
     .pipe(browserSync.stream());
 });
 
-// Generate RTLCSS file
+// Generate RTL CSS file
 gulp.task('rtlcss', () => {
-  const plugins = [rtlcss(), cssnano()];
+  const plugins = [
+    rtlcss(),
+    cssnano()
+  ];
   return gulp
     .src('src/assets/css/main.css')
     .pipe(postcss([plugins[0]]))
@@ -53,7 +61,8 @@ gulp.task('rtlcss', () => {
     .pipe(gulp.dest('src/assets/css/'))
     .pipe(postcss([plugins[1]]))
     .pipe(rename({ suffix: '.min' }))
-    .pipe(gulp.dest('dist/assets/css/'));
+    .pipe(gulp.dest('dist/assets/css/'))
+    .pipe(browserSync.stream());
 });
 
 // Minify app.js
@@ -62,7 +71,8 @@ gulp.task('min-js', () => {
     .src('src/assets/js/app.js')
     .pipe(uglify())
     .pipe(rename({ suffix: '.min' }))
-    .pipe(gulp.dest('dist/assets/js/'));
+    .pipe(gulp.dest('dist/assets/js/'))
+    .pipe(browserSync.stream());
 });
 
 // Copy JS from node_modules
@@ -82,24 +92,10 @@ gulp.task('copy-fonts', () => {
   return gulp.src(['node_modules/']).pipe(gulp.dest('dist/assets/fonts/'));
 });
 
-// Compress Images
-gulp.task('imagemin', () => {
-  gulp
-    .src('src/assets/images/*')
-    .pipe(
-      imagemin({
-        verbose: true,
-        progressive: true,
-        optimizationLevel: 5,
-        interlaced: true
-      })
-    )
-    .pipe(rename({ suffix: '-min' }))
-    .pipe(gulp.dest('dist/assets/images/'));
-});
-
 // Copy all assets from node_modules at once
 gulp.task('copy-assets', ['copy-js', 'copy-css', 'copy-fonts']);
 
 // Default Task
-gulp.task('default', ['serve']);
+gulp.task('default', ['serve'], () => {
+  log(chalk.green('Gulp Started Successfully'));
+});
