@@ -1,7 +1,7 @@
 # Starter Kit Documentation
 
 ## Table of Contents
-1. [Important Update](#Update-as-of-18-Dec.-2020)
+1. [Important Update](#update-as-of-18-dec-2020)
 2. [Changelog](#Changelog)
 3. [TODO](#TODO)
 
