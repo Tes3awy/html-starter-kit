@@ -84,12 +84,16 @@ gulp.task('copy-js', () => {
 
 // Copy CSS from node_modules
 gulp.task('copy-css', () => {
-  return gulp.src(['node_modules/']).pipe(gulp.dest('dist/assets/css/'));
+  return gulp
+    .src(['node_modules/normalize.css/normalize.css'])
+    .pipe(gulp.dest('dist/assets/css/'));
 });
 
 // Copy Fonts from node_modules
 gulp.task('copy-fonts', () => {
-  return gulp.src(['node_modules/']).pipe(gulp.dest('dist/assets/fonts/'));
+  return gulp
+    .src([''])
+    .pipe(gulp.dest('dist/assets/fonts/'));
 });
 
 // Copy all assets from node_modules at once
