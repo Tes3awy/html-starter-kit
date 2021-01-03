@@ -1,5 +1,5 @@
 {
-  "name": "starter-template",
+  "name": "starter-kit",
   "version": "2.0.0",
   "description": "Starter Kit for front-end developers",
   "main": "gulpfile.js",
@@ -11,14 +11,14 @@
   },
   "author": "Osama Abbas <oabbas2512@gmail.com> (https://tes3awy.netlify.app)",
   "license": "MIT",
-  "homepage": "https://github.com/Tes3awy/html-starter-template",
+  "homepage": "https://github.com/Tes3awy/html-starter-kit",
   "bugs": {
-    "url": "https://github.com/Tes3awy/html-starter-template/issues",
+    "url": "https://github.com/Tes3awy/html-starter-kit/issues",
     "email": "oabbas2512@gmail.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Tes3awy/html-starter-template.git"
+    "url": "https://github.com/Tes3awy/html-starter-kit.git"
   },
   "os": [
     "win64",
