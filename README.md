@@ -1,6 +1,6 @@
 # Starter Kit Documentation
 
-First, you need to run `npm install` to install all dependencies. Then, just run `npm start` and you're ready to start your project right away. Once you save `index.html`, and `dist` directory will be created automatically.
+First, you need to run `npm install` to install all dependencies. Then, just run `npm start` and you're ready to start your project right away. Once you save `index.html`, a `dist` directory will be created automatically.
 
 Carefully inspect `gulpfile.js`. It's well commented and can be easily understood.
 
