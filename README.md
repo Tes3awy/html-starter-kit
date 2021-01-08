@@ -66,9 +66,9 @@ The directory tree should look like below. Unless you want to change `src` and `
 
 > ## Update as of 18 Dec. 2020
 
-Gulp 3 is outdated and is no longer maintained nor supported by Node.js 11.0.0 and above.
+Gulp 3 is outdated and is no longer maintained nor supported by Node.js 11.0.0 or later.
 
-Added `npm-shrinkwrap.json` file to make Gulp v3.9.1 compatible with Node.js v11.0.0 and above.
+Added `npm-shrinkwrap.json` file to make Gulp v3.9.1 compatible with Node.js v11.0.0 or later.
 
 After you run `npm install`, `npm-shrinkwrap.json` will be modified. **DON'T TOUCH IT**!
 
